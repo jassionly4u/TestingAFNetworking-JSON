@@ -21,7 +21,7 @@
     
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
-    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",nil]];
+    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",nil]];
     
     NSDictionary *dateDic = @{@"data":@{@"name":@"name", @"age":@"40"}};
     
@@ -39,7 +39,7 @@
     // Method 2
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:NSJSONWritingPrettyPrinted];
-    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",nil]];
+    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",nil]];
     NSDictionary *dateDic = @{@"data":@{@"name":@"name", @"age":@"40"}};
     
     [manager POST:@"http://localhost/Testing/testJson.php"
@@ -48,7 +48,7 @@
               NSLog(@"response %@",responseObject);
               NSDictionary *dict = (NSDictionary *)responseObject;
               
-              NSLog(@"dict %@",[dict valueForKeyPath:@"data.age"]);
+              NSLog(@"age - %@",[dict valueForKeyPath:@"data.age"]);
               
           }
           failure:^(NSURLSessionDataTask *task, NSError *error) {
